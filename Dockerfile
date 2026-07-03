@@ -1,3 +1,8 @@
-git add Dockerfile
-git commit -m "Ajout du Dockerfile pour Render"
-git push
+FROM php:8.2-cli
+
+RUN docker-php-ext-install pdo pdo_sqlite
+
+WORKDIR /app
+COPY . .
+
+CMD sh -c "php -S 0.0.0.0:${PORT:-10000}"
